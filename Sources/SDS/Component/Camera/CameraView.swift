@@ -8,7 +8,7 @@ import AVFoundation
 public struct CameraView: View {
     
     @Environment(\.dismiss) var dismiss
-    @Binding var image: Image?
+    @Binding var image: UIImage?
     
     private let service = CameraService()
     private var session: AVCaptureSession
@@ -17,7 +17,7 @@ public struct CameraView: View {
     @State var imageSelection: PhotosPickerItem?
     @State var subscriptions = [AnyCancellable]()
     
-    public init(_ image: Binding<Image?>) {
+    public init(_ image: Binding<UIImage?>) {
         self._image = image
         self.session = service.session
     }
@@ -26,7 +26,7 @@ public struct CameraView: View {
         subscriptions = [
             service.$photo.sink { [self] (photo) in
                 guard let pic = photo else { return }
-                self.image = Image(uiImage: pic.image!)
+                self.image = pic.image!
                 dismiss()
             },
             service.$flashMode.sink { [self] (mode) in
@@ -36,11 +36,11 @@ public struct CameraView: View {
     }
     
     func loadTransferable(from imageSelection: PhotosPickerItem) {
-        imageSelection.loadTransferable(type: Image.self) { result in
+        imageSelection.loadTransferable(type: Data.self) { result in
             DispatchQueue.main.async {
                 guard imageSelection == self.imageSelection else { return }
                 if case let .success(image) = result {
-                    self.image = image
+                    self.image = UIImage(data: image!)
                     dismiss()
                 }
             }
