@@ -15,7 +15,7 @@ public struct LargeButton: View {
         self.action = action
     }
     
-    public func disabled(_ condition: Bool) -> Self {
+    public func disabled(_ condition: Bool = true) -> Self {
         .init(title, isDisabled: condition, action: action)
     }
     
