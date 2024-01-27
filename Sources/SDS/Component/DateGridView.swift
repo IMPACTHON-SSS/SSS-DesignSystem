@@ -4,7 +4,10 @@ import SwiftUI
 public struct DateGridView: View {
     
     let action: (Int) -> Void
-    let yearAndMonth: Date = Date()
+    
+    public init(action: @escaping (Int) -> Void) {
+        self.action = action
+    }
     
     var today: Int {
         let dateFormatter = DateFormatter()
@@ -15,6 +18,7 @@ public struct DateGridView: View {
     var arrayOfDays: [[Int]] {
         let calendar = Calendar.current
         
+        let yearAndMonth: Date = Date()
         let month = calendar.component(.month, from: yearAndMonth)
         let year = calendar.component(.year, from: yearAndMonth)
         let firstDayOfMonth = calendar.date(from: DateComponents(year: year, month: month))!
