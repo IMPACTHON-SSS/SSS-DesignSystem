@@ -1,13 +1,24 @@
 import SwiftUI
 
 @available(iOS 15, macOS 12, *)
+public enum DateGrid {
+    
+    case image(Int, Image)
+    case asyncImage(Int, URL)
+    case red(Int)
+}
+
+@available(iOS 15, macOS 12, *)
 public struct DateGridView: View {
     
     let yearAndMonth: Date
+    let dateGrids: [DateGrid]
     let action: (Int) -> Void
     
-    public init(yearAndMonth: Date = Date(),
+    public init(dateGrids: [DateGrid],
+                yearAndMonth: Date = Date(),
                 action: @escaping (Int) -> Void) {
+        self.dateGrids = dateGrids
         self.yearAndMonth = yearAndMonth
         self.action = action
     }
@@ -48,6 +59,16 @@ public struct DateGridView: View {
         return calendarDays
     }
     
+    func findGrid(_ with: Int) -> DateGrid? {
+        dateGrids.first(where: {
+            switch $0 {
+            case let .image(day, _): day == with
+            case let .asyncImage(day, _): day == with
+            case let .red(day): day == with
+            }
+        })
+    }
+    
     public var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack {
@@ -71,18 +92,38 @@ public struct DateGridView: View {
                         let week = arrayOfDays[i]
                         ForEach(week.indices, id: \.self) { j in
                             let day = week[j]
+                            let dateGrid = findGrid(day)
                             if day != 0 {
                                 Button {
                                     action(day)
                                 } label: {
                                     ZStack {
-                                        Text("\(day)")
-                                            .font(.system(size: 20, weight: .regular))
-                                            .foregroundStyle(Color.blackColor)
-                                        if day == today {
-                                            RoundedRectangle(cornerRadius: 4)
-                                                .strokeBorder(Color.accentColor, lineWidth: 2)
+                                        Group {
+                                            switch dateGrid {
+                                            case let .image(_, image):
+                                                image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                            case let .asyncImage(_, url):
+                                                AsyncImage(url: url) { image in
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                } placeholder: {
+                                                    Color.gray1
+                                                }
+                                            case .red(_):
+                                                RoundedRectangle(cornerRadius: 4)
+                                                    .fill(Color.redColor)
+                                            default: EmptyView()
+                                            }
                                         }
+                                        .aspectRatio(10/11, contentMode: .fit)
+                                        Text("\(day)")
+                                            .font(day == today
+                                                  ? .system(size: 24, weight: .medium)
+                                                  : .system(size: 20, weight: .regular))
+                                            .foregroundStyle(Color.blackColor)
                                     }
                                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                                     .aspectRatio(10/11, contentMode: .fit)
@@ -104,7 +145,8 @@ public struct DateGridView: View {
 struct DateGridPreView: View {
     
     var body: some View {
-        DateGridView { date in
+        DateGridView(dateGrids: [.red(1),
+                                 .asyncImage(2, URL(string: "https://nater.com/nater_riding.jpg")!)]) { date in
             print(date)
         }
         .padding()
