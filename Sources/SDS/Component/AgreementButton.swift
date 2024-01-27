@@ -28,23 +28,37 @@ public struct AgreementButton: View {
     public var body: some View {
         HStack(spacing: 12) {
             Checkbox(isChecked: $isChecked)
-            Text("[\(isRequired ? "필수" : "선택")]")
-            Text(title)
+            Button(action: action) {
+                Text("[\(isRequired ? "필수" : "선택")] ")
+                    .foregroundColor(isRequired ? .redColor : .gray7)
+                +
+                Text(title)
+                    .foregroundColor(.gray7)
+                Spacer()
+                Image.smallArrow
+                    .foregroundStyle(Color.gray7)
+                    .scaledToFit()
+                    .frame(height: 11.15)
+                    .rotationEffect(.degrees(180))
+            }
         }
         .font(.system(size: 16, weight: .medium))
     }
 }
 
-//struct AgreementButtonPreview: View {
-//    
-//    @State var isChecked: Bool = false
-//    
-//    var body: some View {
-//        Checkbox(isChecked: $isChecked)
-//    }
-//}
-//
-//@available(iOS 15, macOS 12, *)
-//#Preview {
-//    return AgreementButton()
-//}
+struct AgreementButtonPreview: View {
+    
+    @State var isChecked: Bool = false
+    
+    var body: some View {
+        AgreementButton("테스트", isChecked: $isChecked) {
+            print("Hello")
+        }
+        .required()
+    }
+}
+
+@available(iOS 15, macOS 12, *)
+#Preview {
+    return AgreementButtonPreview()
+}

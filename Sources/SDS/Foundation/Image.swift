@@ -3,10 +3,10 @@ import SwiftUI
 @available(iOS 15, macOS 12, *)
 public extension Image {
     
-    static let add            = Image("Check", bundle: .module)
-    static let bigArrow       = Image("Home", bundle: .module)
-    static let check          = Image("My", bundle: .module)
-    static let creditCard     = Image("Pay", bundle: .module)
+    static let add            = Image("Add", bundle: .module)
+    static let bigArrow       = Image("BigArrow", bundle: .module)
+    static let check          = Image("Check", bundle: .module)
+    static let creditCard     = Image("CreditCard", bundle: .module)
     static let dot            = Image("Dot", bundle: .module)
     static let home           = Image("Home", bundle: .module)
     static let menu           = Image("Menu", bundle: .module)
