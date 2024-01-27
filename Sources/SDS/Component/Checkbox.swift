@@ -22,6 +22,8 @@ public struct Checkbox: View {
                         .fill(Color.main)
                     Image.check
                         .foregroundStyle(Color.white)
+                        .scaledToFit()
+                        .frame(width: 15.5)
                 }
             }
             .frame(width: 24, height: 24)
@@ -29,8 +31,10 @@ public struct Checkbox: View {
     }
 }
 
-struct PreviewView: View {
+struct CheckboxPreview: View {
+    
     @State var isChecked: Bool = false
+    
     var body: some View {
         Checkbox(isChecked: $isChecked)
     }
@@ -38,5 +42,5 @@ struct PreviewView: View {
 
 @available(iOS 15, macOS 12, *)
 #Preview {
-    return PreviewView()
+    return CheckboxPreview()
 }
