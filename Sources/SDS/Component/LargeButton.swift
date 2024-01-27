@@ -22,7 +22,7 @@ public struct LargeButton: View {
     public var body: some View {
         Button(action: action) {
             Text(title)
-                .foregroundStyle(isDisabled ? Color.gray4 : .whiteColor)
+                .foregroundStyle(isDisabled ? Color.gray4 : .blackColor)
                 .font(.system(size: 16, weight: .semibold))
                 .padding(16)
                 .frame(maxWidth: .infinity)

@@ -21,7 +21,7 @@ public struct Checkbox: View {
                     rectangle
                         .fill(Color.main)
                     Image.check
-                        .foregroundStyle(Color.white)
+                        .foregroundStyle(Color.whiteColor)
                         .scaledToFit()
                         .frame(width: 15.5)
                 }

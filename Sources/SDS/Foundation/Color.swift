@@ -23,11 +23,11 @@ public extension Color {
         }
     }
     
-    static let main       = Color(light: "#FA7F3A")
-    static let redColor   = Color(light: "#FE482F")
-    static let kakao      = Color(light: "#FFE812")
+    static let main       = Color(light: "#FFB707")
+    static let date       = Color(light: "#ADADAD")
+    static let background = Color(light: "#E7E7E7")
+    static let redColor   = Color(light: "#FF5D3A")
     static let whiteColor = Color(light: "#FCFCFC")
-    static let modifyGray = Color(light: "#F4F4F8")
     static let gray1      = Color(light: "#F1F1F1")
     static let gray2      = Color(light: "#E2E2E2")
     static let gray3      = Color(light: "#C7C7C7")
