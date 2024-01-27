@@ -4,23 +4,32 @@ import SwiftUI
 public struct LargeButton: View {
     
     let title: String
+    let isDisabled: Bool
     let action: () -> Void
     
-    public init(_ title: String, action: @escaping () -> Void) {
+    public init(_ title: String,
+                isDisabled: Bool = false,
+                action: @escaping () -> Void) {
         self.title = title
+        self.isDisabled = isDisabled
         self.action = action
+    }
+    
+    public func disabled(_ condition: Bool) -> Self {
+        .init(title, isDisabled: condition, action: action)
     }
     
     public var body: some View {
         Button(action: action) {
             Text(title)
-                .foregroundStyle(Color.whiteColor)
+                .foregroundStyle(isDisabled ? Color.gray4 : .whiteColor)
                 .font(.system(size: 16, weight: .semibold))
                 .padding(16)
                 .frame(maxWidth: .infinity)
-                .background(Color.main)
+                .background(isDisabled ? Color.gray1 : .main)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
         }
+        .disabled(isDisabled)
     }
 }
 
