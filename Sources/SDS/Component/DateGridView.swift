@@ -3,9 +3,12 @@ import SwiftUI
 @available(iOS 15, macOS 12, *)
 public struct DateGridView: View {
     
+    let yearAndMonth: Date
     let action: (Int) -> Void
     
-    public init(action: @escaping (Int) -> Void) {
+    public init(yearAndMonth: Date = Date(),
+                action: @escaping (Int) -> Void) {
+        self.yearAndMonth = yearAndMonth
         self.action = action
     }
     
@@ -18,7 +21,6 @@ public struct DateGridView: View {
     var arrayOfDays: [[Int]] {
         let calendar = Calendar.current
         
-        let yearAndMonth: Date = Date()
         let month = calendar.component(.month, from: yearAndMonth)
         let year = calendar.component(.year, from: yearAndMonth)
         let firstDayOfMonth = calendar.date(from: DateComponents(year: year, month: month))!
@@ -54,17 +56,18 @@ public struct DateGridView: View {
                     Text(weekday)
                         .foregroundStyle({ () -> Color in
                             switch weekday {
-                            case "SUN", "SAT": .accentColor
-                            default: Color(.label)
+                            case "SUN": .redColor
+                            case "SAT": .blueColor
+                            default: .gray4
                             }
                         }())
                         .frame(maxWidth: .infinity)
                 }
             }
-            .font(.system(size: 14, weight: .semibold))
-            VStack(spacing: 5) {
+            .font(.system(size: 13, weight: .semibold))
+            VStack(spacing: 7) {
                 ForEach(arrayOfDays.indices, id: \.self) { i in
-                    HStack(spacing: 5) {
+                    HStack(spacing: 5.5) {
                         let week = arrayOfDays[i]
                         ForEach(week.indices, id: \.self) { j in
                             let day = week[j]
@@ -73,24 +76,22 @@ public struct DateGridView: View {
                                     action(day)
                                 } label: {
                                     ZStack {
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(Color.gray.opacity(0.1))
-                                            .aspectRatio(1, contentMode: .fit)
                                         Text("\(day)")
-                                            .font(.system(size: 20, weight: .semibold))
-                                            .foregroundStyle(Color.gray.opacity(0.3))
+                                            .font(.system(size: 20, weight: .regular))
+                                            .foregroundStyle(Color.blackColor)
                                         if day == today {
-                                            RoundedRectangle(cornerRadius: 10)
+                                            RoundedRectangle(cornerRadius: 4)
                                                 .strokeBorder(Color.accentColor, lineWidth: 2)
-                                                .aspectRatio(1, contentMode: .fit)
                                         }
                                     }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .aspectRatio(10/11, contentMode: .fit)
                                 }
                                 .frame(maxWidth: .infinity)
                             } else {
                                 Color.clear
                                     .frame(maxWidth: .infinity)
-                                    .aspectRatio(1, contentMode: .fit)
+                                    .aspectRatio(10/11, contentMode: .fit)
                             }
                         }
                     }

@@ -27,6 +27,7 @@ public extension Color {
     static let date       = Color(light: "#ADADAD")
     static let background = Color(light: "#E7E7E7")
     static let redColor   = Color(light: "#FF5D3A")
+    static let blueColor  = Color(light: "#3A94FF")
     static let whiteColor = Color(light: "#FCFCFC")
     static let gray1      = Color(light: "#F1F1F1")
     static let gray2      = Color(light: "#E2E2E2")

@@ -22,6 +22,8 @@ public extension Image {
     static let teamChat       = Image("TeamChat", bundle: .module)
     
     // MARK: - Image
+    static let agreement      = Image("Agreement", bundle: .module)
     static let logo           = Image("Logo", bundle: .module)
+    static let onboarding     = Image("Onboarding", bundle: .module)
     static let title          = Image("Title", bundle: .module)
 }
