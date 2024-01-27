@@ -1,23 +1,21 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "SSS-DesignSystem",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "SSS-DesignSystem",
-            targets: ["SSS-DesignSystem"]),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "SSS-DesignSystem"),
-        .testTarget(
-            name: "SSS-DesignSystemTests",
-            dependencies: ["SSS-DesignSystem"]),
-    ]
+  name: "SSS-DesignSystem",
+  platforms: [.iOS(.v15)],
+  products: [
+    .library(
+      name: "SDS",
+      targets: ["SDS"]),
+  ],
+  dependencies: [
+  ],
+  targets: [
+    .target(
+      name: "SDS",
+      dependencies: [])
+  ]
 )
