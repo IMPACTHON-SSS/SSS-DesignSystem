@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Camera-SwiftUI",
+        "repositoryURL": "https://github.com/rorodriguez116/Camera-SwiftUI.git",
+        "state": {
+          "branch": null,
+          "revision": "a83ad04ec213095e14d71491af8b55e7575a7b40",
+          "version": "0.5.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

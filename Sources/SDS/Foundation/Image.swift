@@ -1,6 +1,6 @@
 import SwiftUI
 
-@available(iOS 15, macOS 12, *)
+@available(iOS 16, macOS 13, *)
 public extension Image {
     
     // MARK: - Icon
@@ -11,8 +11,11 @@ public extension Image {
     static let check          = Image("Check", bundle: .module)
     static let dot            = Image("Dot", bundle: .module)
     static let edit           = Image("Edit", bundle: .module)
+    static let flash          = Image("Flash", bundle: .module)
+    static let flashSlash     = Image("FlashSlash", bundle: .module)
     static let human          = Image("Human", bundle: .module)
     static let menu           = Image("Menu", bundle: .module)
+    static let mountain       = Image("Mountain", bundle: .module)
     static let notification   = Image("Notification", bundle: .module)
     static let notificationOn = Image("NotificationOn", bundle: .module)
     static let openChat       = Image("OpenChat", bundle: .module)

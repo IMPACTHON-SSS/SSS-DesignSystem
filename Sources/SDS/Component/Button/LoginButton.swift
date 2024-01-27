@@ -1,6 +1,6 @@
 import SwiftUI
 
-@available(iOS 15, macOS 12, *)
+@available(iOS 16, macOS 13, *)
 public struct LoginButton: View {
     
     let action: () -> Void
@@ -38,7 +38,7 @@ struct LoginButtonPreview: View {
     }
 }
 
-@available(iOS 15, macOS 12, *)
+@available(iOS 16, macOS 13, *)
 #Preview {
     return LoginButtonPreview()
 }

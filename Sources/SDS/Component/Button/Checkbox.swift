@@ -1,6 +1,6 @@
 import SwiftUI
 
-@available(iOS 15, macOS 12, *)
+@available(iOS 16, macOS 13, *)
 public struct Checkbox: View {
     
     @Binding var isChecked: Bool
@@ -40,7 +40,7 @@ struct CheckboxPreview: View {
     }
 }
 
-@available(iOS 15, macOS 12, *)
+@available(iOS 16, macOS 13, *)
 #Preview {
     return CheckboxPreview()
 }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-@available(iOS 15, macOS 12, *)
+@available(iOS 16, macOS 13, *)
 public struct NavigationBar<C: View>: View {
     
     @Environment(\.dismiss) var dismiss
@@ -38,7 +38,7 @@ struct NavigationBarPreview: View {
     }
 }
 
-@available(iOS 15, macOS 12, *)
+@available(iOS 16, macOS 13, *)
 #Preview {
     return NavigationBarPreview()
 }

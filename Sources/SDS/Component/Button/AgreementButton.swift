@@ -1,6 +1,6 @@
 import SwiftUI
 
-@available(iOS 15, macOS 12, *)
+@available(iOS 16, macOS 13, *)
 public struct AgreementButton: View {
     
     let title: String
@@ -58,7 +58,7 @@ struct AgreementButtonPreview: View {
     }
 }
 
-@available(iOS 15, macOS 12, *)
+@available(iOS 16, macOS 13, *)
 #Preview {
     return AgreementButtonPreview()
 }
