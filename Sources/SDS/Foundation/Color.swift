@@ -27,6 +27,7 @@ public extension Color {
     static let redColor   = Color(light: "#FE482F")
     static let kakao      = Color(light: "#FFE812")
     static let whiteColor = Color(light: "#FCFCFC")
+    static let modifyGray = Color(light: "#F4F4F8")
     static let gray1      = Color(light: "#F1F1F1")
     static let gray2      = Color(light: "#E2E2E2")
     static let gray3      = Color(light: "#C7C7C7")
