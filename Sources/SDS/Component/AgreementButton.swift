@@ -52,7 +52,7 @@ struct AgreementButtonPreview: View {
     
     var body: some View {
         AgreementButton("테스트", isChecked: $isChecked) {
-            print("Hello")
+            print("Pressed")
         }
         .required()
     }
