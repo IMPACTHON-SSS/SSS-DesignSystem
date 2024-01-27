@@ -25,7 +25,10 @@ public extension Color {
     
     static let main       = Color(light: "#FFB707")
     static let date       = Color(light: "#ADADAD")
-    static let background = Color(light: "#E7E7E7")
+    static let text       = Color(light: "#0C0C0C", dark: "#E7E7E7")
+    static let background = Color(light: "#E7E7E7", dark: "#0C0C0C")
+    static let iPhone     = Color(light: "#000000", dark: "#FFFFFF")
+    static let iPhoneDark = Color(light: "#FFFFFF", dark: "#000000")
     static let redColor   = Color(light: "#FF5D3A")
     static let blueColor  = Color(light: "#3A94FF")
     static let whiteColor = Color(light: "#FCFCFC")
