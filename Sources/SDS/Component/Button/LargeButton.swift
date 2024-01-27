@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 @available(iOS 16, macOS 13, *)
 public struct LargeButton: View {
@@ -6,6 +7,8 @@ public struct LargeButton: View {
     let title: String
     let isDisabled: Bool
     let action: () -> Void
+    
+    @State var isKeyboardUp: Bool = false
     
     public init(_ title: String,
                 isDisabled: Bool = false,
@@ -19,6 +22,18 @@ public struct LargeButton: View {
         .init(title, isDisabled: condition, action: action)
     }
     
+    var keyboardState: AnyPublisher<Bool, Never> {
+      Publishers.Merge(
+        NotificationCenter.default
+          .publisher(for: UIResponder.keyboardWillShowNotification)
+          .map { _ in true },
+        NotificationCenter.default
+          .publisher(for: UIResponder.keyboardWillHideNotification)
+          .map { _ in false }
+      )
+      .eraseToAnyPublisher()
+    }
+    
     public var body: some View {
         Button(action: action) {
             Text(title)
@@ -27,9 +42,15 @@ public struct LargeButton: View {
                 .padding(16)
                 .frame(maxWidth: .infinity)
                 .background(isDisabled ? Color.gray1 : .main)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .clipShape(RoundedRectangle(cornerRadius: isKeyboardUp ? 0 : 12))
         }
+        .padding([.horizontal, .bottom], isKeyboardUp ? 0 : 24)
         .disabled(isDisabled)
+        .onReceive(keyboardState) { newValue in
+            withAnimation(.linear(duration: 0.15)) {
+                isKeyboardUp = newValue
+            }
+        }
     }
 }
 
