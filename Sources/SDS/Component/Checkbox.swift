@@ -13,14 +13,30 @@ public struct Checkbox: View {
         Button {
             isChecked.toggle()
         } label: {
-            RoundedRectangle(cornerRadius: 4)
-                .frame(width: 24, height: 24)
+            ZStack {
+                let rectangle = RoundedRectangle(cornerRadius: 4)
+                rectangle
+                    .strokeBorder(Color.gray4, lineWidth: 1)
+                if isChecked {
+                    rectangle
+                        .fill(Color.main)
+                    Image.check
+                        .foregroundStyle(Color.white)
+                }
+            }
+            .frame(width: 24, height: 24)
         }
+    }
+}
+
+struct PreviewView: View {
+    @State var isChecked: Bool = false
+    var body: some View {
+        Checkbox(isChecked: $isChecked)
     }
 }
 
 @available(iOS 15, macOS 12, *)
 #Preview {
-    @State var isChecked: Bool = false
-    return Checkbox(isChecked: $isChecked)
+    return PreviewView()
 }
