@@ -101,5 +101,6 @@ public struct CameraView: View {
             }
         }
         .padding(.vertical, 20)
+        .background(Color.blackColor.ignoresSafeArea())
     }
 }
