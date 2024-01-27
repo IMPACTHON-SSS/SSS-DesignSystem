@@ -4,8 +4,15 @@ import SwiftUI
 public enum DateGrid {
     
     case image(Int, Image)
-    case asyncImage(Int, URL)
+    case asyncImage(Int, URL?)
     case red(Int)
+    
+    var textColor: Color {
+        switch self {
+        case .image, .asyncImage: .whiteColor
+        case .red: .blackColor
+        }
+    }
 }
 
 @available(iOS 15, macOS 12, *)
@@ -98,32 +105,36 @@ public struct DateGridView: View {
                                     action(day)
                                 } label: {
                                     ZStack {
-                                        Group {
-                                            switch dateGrid {
-                                            case let .image(_, image):
-                                                image
-                                                    .resizable()
-                                                    .scaledToFill()
-                                            case let .asyncImage(_, url):
-                                                AsyncImage(url: url) { image in
-                                                    image
-                                                        .resizable()
-                                                        .scaledToFill()
-                                                } placeholder: {
-                                                    Color.gray1
+                                        Color.clear
+                                            .overlay(
+                                                Group {
+                                                    switch dateGrid {
+                                                    case let .image(_, image):
+                                                        image
+                                                            .resizable()
+                                                            .overlay(Color.black.opacity(0.6))
+                                                    case let .asyncImage(_, url):
+                                                        AsyncImage(url: url) { image in
+                                                            image
+                                                                .resizable()
+                                                        } placeholder: {
+                                                            Color.gray1
+                                                        }
+                                                        .overlay(Color.black.opacity(0.6))
+                                                    case .red(_):
+                                                        Color.redColor
+                                                    default: EmptyView()
+                                                    }
                                                 }
-                                            case .red(_):
-                                                RoundedRectangle(cornerRadius: 4)
-                                                    .fill(Color.redColor)
-                                            default: EmptyView()
-                                            }
-                                        }
-                                        .aspectRatio(10/11, contentMode: .fit)
+                                                    .scaledToFill()
+                                            )
+                                            .clipShape(RoundedRectangle(cornerRadius: 4))
+                                            .aspectRatio(10/11, contentMode: .fill)
                                         Text("\(day)")
                                             .font(day == today
                                                   ? .system(size: 24, weight: .medium)
                                                   : .system(size: 20, weight: .regular))
-                                            .foregroundStyle(Color.blackColor)
+                                            .foregroundStyle(dateGrid?.textColor ?? Color.black)
                                     }
                                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                                     .aspectRatio(10/11, contentMode: .fit)
@@ -145,8 +156,11 @@ public struct DateGridView: View {
 struct DateGridPreView: View {
     
     var body: some View {
-        DateGridView(dateGrids: [.red(1),
-                                 .asyncImage(2, URL(string: "https://nater.com/nater_riding.jpg")!)]) { date in
+        DateGridView(dateGrids: [
+            .red(1),
+            .asyncImage(2, URL(string: "https://nater.com/nater_riding.jpg")),
+            .red(4)
+        ]) { date in
             print(date)
         }
         .padding()
